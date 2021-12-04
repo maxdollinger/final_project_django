@@ -39,7 +39,6 @@
         </div>
     </nav>
 
-    <!-- Page content -->
     <div class="container-fluid">
             <h2>{{ course.name }}</h2>
             <div class="card-columns-vertical">
@@ -50,24 +49,12 @@
                     </div>
                 {% endfor %}
             </div>
-            <!-- Task: show questions and choices -->
-            <!-- <HINT> Use Bootstrap Collapse to hide exam first, more details could be found here
-            https://www.w3schools.com/bootstrap4/bootstrap_collapse.asp-->
-
-            <!-- <HINT> If user is authenticated, show course exam with a list of question -->
             {% if request.user.is_authenticated %}
-            <!-- <HINT> Each example will have many questions -->
-            <!-- <HINT> Each question will have many choices -->
-                    
-            <!-- <HINT> Create a form to collect the selected choices for all questions -->
-            <!-- <HINT> For each question choice, you may create a checkbox input like
-            <input type="check" name="choice_{{choice.id}}" id="{{choice.id}}" ...>
-            -->
             <button class="btn btn-primary btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 Start exam
             </button>
             <div class="collapse" id="collapseExample">
-            <form id="questionform" action="point to a submit view" method="post">
+            <form id="questionform" action="{% url 'onlinecourse:submit' course.id %}" method="post">
                         {% for question in course.question_set.all %}
                         <div class="card mt-1">
                             <div class="card-header"><h5>{{ question.text}}</h5></div>
